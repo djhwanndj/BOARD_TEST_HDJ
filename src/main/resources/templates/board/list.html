@@ -3,41 +3,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시글 목록</title>
+	<title>글 목록</title>
 </head>
 <body>
 	<h1>게시글 목록</h1>
-	<a href="/board/insert">게시글 작성</a>
-	<table border="=1">
+	<a href="/board/insert">글쓰기</a>
+
+	<ul></ul>
+
+	<table border="1">
 		<tr>
-			<td width="50">번호</td>
-			<td width="300">제목</td>
-			<td width="100">작성자</td>
-			<td width="200">등록일자</td>
-			<td width="200">수정일자</td>
-			<td width="100">조회수</td>
+			<th width="50">번호</th>
+			<th width="300">제목</th>
+			<th width="100">작성자</th>
+			<th width="200">등록일자</th>
+			<th width="200">수정일자</th>
+			<th width="100">조회수</th>
 		</tr>
-		<th:block th:each="board : ${boardList}">
-			<tr>
-				<td align="center" th:text="${board.no}"></td>
-				<td>
-					<a th:href="|/board/read?no=${board.no}|"
-					th:text="${board.title}"></a>
-				</td>
-				<td align="center" th:text="${board.writer}"></td>
-				<td align="center">
-			 		<span th:text = "${date.format(board.regdate, 'yyyy-MM-dd HH:mm:ss')}"></span>
-				</td>
-				<td align="center">
-					<span th:text="$ {date.format (board.updDate. 'yyyy-MM-dd HH:mm:ss' )}"></span>
-				</td>
-				<td align="center" th:text="${board.view}"></td>
-			</tr>
-
-
-		</th:block>
-
-
+		<tr th:each="board : ${boardList}">
+			<td align="center" th:text="${board.no}"></td>
+			<td>
+				
+				<a th:href="|/board/read?no=${board.no}|" th:text="${board.title}"></a>
+			</td>
+			<td align="center" th:text="${board.writer}"></td>
+			<td align="center">
+				<span th:text="${ #dates.format(board.regDate,'yyyy-MM-dd HH:mm:ss')}"></span>
+			</td>
+			<td align="center" >
+				<span th:text="${ #dates.format(board.updDate,'yyyy-MM-dd HH:mm:ss')}"></span>
+			</td>
+			<td align="center" th:text="${board.views}"></td>
+		</tr>
 	</table>
 </body>
 </html>
